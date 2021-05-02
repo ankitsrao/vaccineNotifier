@@ -37,8 +37,7 @@ for node in notificationmap:
                                         }
                 vaccine_data.append(availabilty_details)
 
-    print("Vaccine info: " + str(vaccine_data))
-
+    print("Vaccine info: ")
     print(json.dumps(vaccine_data, indent=2, sort_keys=False))
 
     if vaccine_data:
