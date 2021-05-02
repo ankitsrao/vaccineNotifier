@@ -9,7 +9,7 @@ from datetime import datetime
 def lambda_handler(event, context):
     date=datetime.today().strftime('%d-%m-%Y')
     
-  notificationmap=[ {
+    notificationmap=[ {
                       "districtCode": xxx,
                       "phone": ["xxx", "xxx", ...],
                       "block_name" : "xxx"
