@@ -7,7 +7,7 @@ import requests
 from datetime import datetime, timedelta
 
 def lambda_handler(event, context):
-    date=(datetime.today()+timedelta(hours=6)).strftime('%d-%m-%Y') #Adding 6 hours so that Lambda considers the Indian local time for computation
+    date=(datetime.today()+timedelta(hours=6)).strftime('%d-%m-%Y') #Adding 6 hours so that Lambda considers the Indian Standard time [GMT+5:30] for computation
     
     notificationmap=[ {
                       "districtCode": xxx,
