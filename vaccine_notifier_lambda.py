@@ -4,10 +4,10 @@ import os
 import urllib
 from urllib import request, parse
 import requests
-from datetime import datetime
+from datetime import datetime, timedelta
 
 def lambda_handler(event, context):
-    date=datetime.today().strftime('%d-%m-%Y')
+    date=(datetime.today()+timedelta(hours=6)).strftime('%d-%m-%Y') #Adding 6 hours so that Lambda considers the Indian local time for computation
     
     notificationmap=[ {
                       "districtCode": xxx,
