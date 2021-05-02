@@ -20,7 +20,7 @@ def lambda_handler(event, context):
     TWILIO_AUTH_TOKEN = os.environ.get("TWILIO_AUTH_TOKEN")
     
     # insert Twilio Account SID into the REST API URL
-    populated_url = TWILIO_SMS_URL.format(TWILIO_ACCOUNT_SID)
+    TWILIO_URL = TWILIO_SMS_URL.format(TWILIO_ACCOUNT_SID)
     
     for node in notificationmap:
         url = "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict?district_id=%s&date=%s" % (node['districtCode'], date)
@@ -53,16 +53,16 @@ def lambda_handler(event, context):
                 post_params = {"To": number, "From": "+13475149515", "Body": json.dumps(vaccine_data, indent=2, sort_keys=False)}
     
                 data = parse.urlencode(post_params).encode()
-                req = request.Request(populated_url)
+                TWILIO_REQUEST = request.Request(TWILIO_URL)
             
                 # add authentication header to request based on Account SID + Auth Token
                 authentication = "{}:{}".format(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
                 base64string = base64.b64encode(authentication.encode('utf-8'))
-                req.add_header("Authorization", "Basic %s" % base64string.decode('ascii'))
+                TWILIO_REQUEST.add_header("Authorization", "Basic %s" % base64string.decode('ascii'))
             
                 try:
                     # perform HTTP POST request
-                    with request.urlopen(req, data) as f:
+                    with request.urlopen(TWILIO_REQUEST, data) as f:
                         print("Twilio returned {}".format(str(f.read().decode('utf-8'))))
                         print("Successfully notified: "+ str(number))
                 except Exception as e:
