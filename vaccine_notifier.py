@@ -1,5 +1,4 @@
 import requests
-import sys
 import json
 from twilio.rest import Client
 from datetime import datetime
